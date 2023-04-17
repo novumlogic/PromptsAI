@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Prompts AI</string>
+    <string name="app_icon">App Icon</string>
+    <string name="empty_prompt_title">You have no content!</string>
+    <string name="empty_prompt">Type text in the textbox below and choose the prompt you wish to use and press Send!</string>
+</resources>
