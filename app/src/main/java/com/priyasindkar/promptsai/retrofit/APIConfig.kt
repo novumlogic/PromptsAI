@@ -12,26 +12,19 @@ import java.util.concurrent.TimeUnit
  */
 class APIConfig {
     companion object {
-        val retrofit = Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL)
-                .client(OkHttpClient().newBuilder()
-                        .connectTimeout(60000, TimeUnit.MILLISECONDS)
-                        .readTimeout(60000, TimeUnit.MILLISECONDS).build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-    }
 
-    fun getRetrofit(): Retrofit {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.apply { interceptor.level = HttpLoggingInterceptor.Level.BODY }
+        private val interceptor = HttpLoggingInterceptor()
+            .apply { level = HttpLoggingInterceptor.Level.BODY }
 
-        return Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL)
-                .client(OkHttpClient().newBuilder()
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(ApiConstants.BASE_URL)
+            .client(
+                OkHttpClient().newBuilder()
                     .addInterceptor(interceptor)
-                        .connectTimeout(60000, TimeUnit.MILLISECONDS)
-                        .readTimeout(60000, TimeUnit.MILLISECONDS).build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+                    .connectTimeout(60000, TimeUnit.MILLISECONDS)
+                    .readTimeout(60000, TimeUnit.MILLISECONDS).build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 }
